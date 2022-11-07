@@ -1,3 +1,8 @@
+#include <stdio.h>
+#include "stdlib.h"
+#include <assert.h>
+#include <memory.h>
+
 #define STACK_MAX 256
 #define INITIAL_GC_THRESHOLD 10000
 
