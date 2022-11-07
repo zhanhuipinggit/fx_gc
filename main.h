@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include "stdlib.h"
-#include <assert.h>
 #include <memory.h>
 
 #define STACK_MAX 256
@@ -41,7 +40,7 @@ typedef struct {
     int stackSize;
 } VM;
 void gc(VM* vm);
-VM* newVM();
+struct VM * newVM();
 void push(VM* vm, Object* value);
 Object* pop(VM* vm);
 Object* newObject(VM* vm, ObjectType type);

@@ -1,17 +1,24 @@
 #include "main.h"
 
 #define STACK_MAX 256
-#define INITIAL_GC_THRESHOLD 10000
+#define INITIAL_GC_THRESHOLD 3
 
 
 
-VM* newVM() {
+void assert(int condition, const char* message){
+        if (!condition) {
+            printf("%s\n", message);
+            exit(1);
+        }
+}
+
+
+struct VM * newVM() {
     VM* vm = malloc(sizeof(VM));
     vm->stackSize = 0;
 
     vm->numObjects = 0;
     vm->maxObjects = INITIAL_GC_THRESHOLD;
-    vm->numObjects++;
     return vm;
 }
 
@@ -38,7 +45,7 @@ Object* newObject(VM* vm, ObjectType type) {
     /* Insert it into the list of allocated objects. */
     object->next = vm->firstObject;
     vm->firstObject = object;
-
+    vm->numObjects ++;
     return object;
 }
 
@@ -109,12 +116,22 @@ void gc(VM* vm) {
     vm->maxObjects = vm->numObjects * 2;
 }
 
+// 释放虚拟机
+void  freeVM(VM *vm) {
+    vm->stackSize = 0;
+    gc(vm);
+    free(vm);
+}
 
 
 int main() {
 
-
-
+    VM *vm = newVM();
+    pushInt(vm,1);
+    pushInt(vm,2);
+    pushInt(vm,3);
+    pushInt(vm,4);
+    freeVM(vm);
     printf("Hello, World!\n");
     return 0;
 }
