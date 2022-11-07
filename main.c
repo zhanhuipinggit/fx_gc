@@ -1,7 +1,6 @@
 #include "main.h"
 
 #define STACK_MAX 256
-#define INITIAL_GC_THRESHOLD 3
 
 
 
@@ -23,12 +22,12 @@ struct VM * newVM() {
 }
 
 void push(VM* vm, Object* value) {
-    assert(vm->stackSize < STACK_MAX);
+    assert(vm->stackSize < STACK_MAX,"stackSize < stack_max");
     vm->stack[vm->stackSize++] = value;
 }
 
 Object* pop(VM* vm) {
-    assert(vm->stackSize > 0);
+    assert(vm->stackSize > 0,"vm->stackSize > 0");
     return vm->stack[--vm->stackSize];
 }
 

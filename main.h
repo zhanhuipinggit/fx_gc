@@ -49,3 +49,4 @@ void markAll(VM* vm);
 void pushInt(VM* vm, int intValue);
 Object* pushPair(VM* vm);
 void sweep(VM* vm);
+void assert(int condition, const char* message);
